@@ -1,0 +1,34 @@
+.visit {
+  padding: 90px 24px;
+  background: var(--discover-bg);
+  background-image: url(/assets/visit/bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 51%;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 27px;
+    max-width: 570px;
+  }
+  &__title {
+    font-size: 3.625rem;
+  }
+  &__text {
+    font-size: 1.25rem;
+    line-height: 32px;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 30px;
+  }
+}
+@media (min-width: 483px) {
+  .visit__buttons {
+    flex-direction: row;
+  }
+}

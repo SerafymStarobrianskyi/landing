@@ -1,0 +1,117 @@
+.discover {
+  position: relative;
+  background: var(--discover-bg);
+  padding: 80px 24px 45px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  &__icon {
+    margin: auto;
+  }
+  &__paragraph {
+    font-size: 1.25rem;
+    line-height: 32px;
+    color: var(--bg-light);
+  }
+  &-slider {
+    margin: auto;
+    max-width: 350px;
+    &__wrapper {
+      overflow: hidden;
+    }
+    &__track {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 30px;
+    }
+    &__slide {
+      min-width: 350px;
+      background: url(/assets/discovery/barrel.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 180%;
+      transition: 0.8s ease;
+      &:hover {
+        background-size: 220%;
+      }
+    }
+    &__content {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
+      padding: 60px 34px;
+      opacity: 0;
+      transition: 0.8s ease;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &__title {
+      font-family: "Frank Ruhl Libre", sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    &__paragraph {
+      font-size: 17px;
+      line-height: 29px;
+      color: #b1a99a;
+    }
+    &__2 {
+      background: url(/assets/discovery/bucket.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 180%;
+    }
+    &__3 {
+      background: url(/assets/discovery/beer.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 180%;
+    }
+    &__4 {
+      background: url(/assets/discovery/friends.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 180%;
+    }
+    &__indicator {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      &-point {
+        width: 10px;
+        height: 10px;
+        background: var(--discover-point);
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+          background: var(--yellow-text);
+        }
+        &-active {
+          background: var(--yellow-text);
+        }
+      }
+    }
+  }
+}
+@media (min-width: 767px) {
+  .discover-slider {
+    max-width: 730px;
+  }
+}
+@media (min-width: 1160px) {
+  .discover-slider {
+    max-width: 1110px;
+  }
+}

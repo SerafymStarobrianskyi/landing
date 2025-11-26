@@ -1,0 +1,42 @@
+:root {
+  --white-text: #ffffff;
+  --bg-nav: #27201e;
+  --bg-light: #f4eee1;
+  --yellow-text: #f8b803;
+  --brown-text: #aa7c5a;
+  --button-color: #0c3b10;
+  --button-hover: #2c8536;
+  --dark-text: #261d17;
+  --light-text: #aa7c5a;
+  --darkbrown-text: #614e44;
+  --discover-bg: #2c221d;
+  --discover-point: rgb(95 71 23);
+  --events-bg: #342924;
+  --testimonials-text: rgba(89, 68, 64, 0.6);
+  --footer-color: rgb(210, 201, 186);
+  --footer-bg: #261d17;
+  font-family: "Rubik", sans-serif;
+  scroll-behavior: smooth;
+  color: var(--white-text);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}

@@ -1,0 +1,141 @@
+.styles {
+  background: linear-gradient(rgba(44, 34, 29, 1), rgba(0, 0, 0, 0.8)),
+    url(/assets/styles/styles-bg.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &-slider {
+    position: relative;
+    padding-bottom: 20px;
+    &__wrapper {
+      overflow: hidden;
+    }
+    &__track {
+      display: flex;
+    }
+    &__icon {
+      color: var(--footer-color);
+    }
+    &__btn {
+      z-index: 1000;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 30px;
+      width: 30px;
+      border: none;
+      background: transparent;
+      transition: 0.3s ease;
+      opacity: 0.6;
+      &:hover {
+        transform: translateY(-50%) scale(1.2);
+      }
+      &--prev {
+        left: 10px;
+        transform: translateY(-50%) rotate(180deg);
+        &:hover {
+          transform: translateY(-50%) rotate(180deg) scale(1.2);
+        }
+      }
+      &--next {
+        right: 10px;
+      }
+    }
+    &__slide {
+      flex: 0 0 100%;
+      padding: 90px 24px;
+    }
+    &__contaier {
+      max-width: 1170px;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      gap: 30px;
+    }
+    &__beer {
+      width: 100%;
+    }
+    &__img {
+      width: 100%;
+      height: auto;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      font-family: "Frank Ruhl Libre", serif;
+      font-weight: 700;
+      flex: 1;
+    }
+    &__bestseller {
+      font-size: 2.125rem;
+    }
+    &__taste {
+      font-size: 1.375rem;
+    }
+    &__title {
+      font-size: 2.125rem;
+      color: var(--yellow-text);
+    }
+    &__paragraph {
+      font-family: "Rubik", sans-serif;
+      color: var(--footer-color);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 29px;
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      &-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      &-text {
+        font-size: 0.875rem;
+      }
+      &-value {
+        font-size: 1.375rem;
+      }
+    }
+    &__indicator {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      &-point {
+        width: 30px;
+        height: 5px;
+        background: var(--button-color);
+        border-radius: 15%;
+        cursor: pointer;
+        &:hover {
+          background: var(--button-hover);
+        }
+        &-active {
+          background: var(--button-hover);
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .styles-slider__beer {
+    width: 50%;
+  }
+  .styles-slider__contaier {
+    flex-direction: row;
+    gap: 0;
+  }
+  .styles-slider__info {
+    flex-direction: row;
+    gap: 100px;
+  }
+}

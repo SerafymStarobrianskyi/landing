@@ -1,0 +1,90 @@
+.events {
+  background: var(--discover-bg);
+  position: relative;
+  &__container {
+    padding: 110px 15px;
+  }
+  &__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+  &__title {
+    font-size: 2.75rem;
+  }
+  &__subtitle {
+    font-size: 1.25rem;
+    line-height: 32px;
+    color: var(--bg-light);
+  }
+  &__cards {
+    &-item {
+      background: var(--events-bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }
+    &-image {
+      flex: 1;
+      order: 1;
+      min-width: 50%;
+      min-height: 250px;
+      max-height: 100%;
+      overflow: hidden;
+      background: url(/assets/events/openday.png) center/cover no-repeat;
+    }
+    &-second {
+      background: url(/assets/events/event.png) center/cover no-repeat;
+    }
+    &-content {
+      order: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: start;
+      padding: 39px 43px;
+    }
+    &--price {
+      color: var(--footer-color);
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 0.875rem;
+      font-weight: 900;
+    }
+    &-title {
+      color: var(--yellow-text);
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 1.375rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    &-date {
+      color: var(--footer-color);
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 0.875rem;
+      font-weight: 900;
+    }
+    &-text {
+      font-size: 1.0635rem;
+      color: var(--footer-color);
+      line-height: 29px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .events__cards-item {
+    flex-direction: row;
+  }
+  .events__cards-image {
+    order: unset;
+  }
+  .events__cards-content {
+    order: unset;
+  }
+}
