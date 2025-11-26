@@ -1,6 +1,6 @@
 .header {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(44, 34, 29, 1)),
-    url(/assets/hero/background.png);
+    url(assets/hero/background.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +25,6 @@
   &-bottom {
     position: relative;
     z-index: 1000;
-    //background: #27201ebb;
     &__container {
       display: flex;
       justify-content: space-between;
