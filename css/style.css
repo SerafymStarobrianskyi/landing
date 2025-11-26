@@ -164,7 +164,7 @@ body.no-scroll {
 }
 .discover-slider__slide {
   min-width: 350px;
-  background: url(assets/discovery/barrel.png);
+  background: url(../assets/discovery/barrel.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 180%;
@@ -201,19 +201,19 @@ body.no-scroll {
   color: #b1a99a;
 }
 .discover-slider__2 {
-  background: url(assets/discovery/bucket.png);
+  background: url(../assets/discovery/bucket.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 180%;
 }
 .discover-slider__3 {
-  background: url(assets/discovery/beer.png);
+  background: url(../assets/discovery/beer.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 180%;
 }
 .discover-slider__4 {
-  background: url(assets/discovery/friends.png);
+  background: url(../assets/discovery/friends.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 180%;
@@ -249,7 +249,7 @@ body.no-scroll {
   }
 }
 .styles {
-  background: linear-gradient(rgb(44, 34, 29), rgba(0, 0, 0, 0.8)), url(assets/styles/styles-bg.webp);
+  background: linear-gradient(rgb(44, 34, 29), rgba(0, 0, 0, 0.8)), url(../assets/styles/styles-bg.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -390,7 +390,7 @@ body.no-scroll {
   }
 }
 .video {
-  background: url(assets/video/bg.png);
+  background: url(../assets/video/bg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -607,7 +607,7 @@ body.no-scroll {
 }
 
 .header {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgb(44, 34, 29)), url(assets/hero/background.png);
+  background: linear-gradient(rgba(0, 0, 0, 0), rgb(44, 34, 29)), url(../assets/hero/background.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -870,13 +870,13 @@ body.no-scroll {
   margin: auto;
 }
 .testimonials-slider__image-first {
-  background: url(assets/testimonials/firstperson.png) 50% 15%/cover no-repeat;
+  background: url(../assets/testimonials/firstperson.png) 50% 15%/cover no-repeat;
 }
 .testimonials-slider__image-second {
-  background: url(assets/testimonials/secondperson.jpg) 50% 15%/cover no-repeat;
+  background: url(../assets/testimonials/secondperson.jpg) 50% 15%/cover no-repeat;
 }
 .testimonials-slider__image-third {
-  background: url(assets/testimonials/thirdperson.jpg) 50% 15%/cover no-repeat;
+  background: url(../assets/testimonials/thirdperson.jpg) 50% 15%/cover no-repeat;
 }
 .testimonials-slider__name {
   color: var(--button-hover);
@@ -957,10 +957,10 @@ body.no-scroll {
   min-height: 250px;
   max-height: 100%;
   overflow: hidden;
-  background: url(assets/events/openday.png) center/cover no-repeat;
+  background: url(../assets/events/openday.png) center/cover no-repeat;
 }
 .events__cards-second {
-  background: url(assets/events/event.png) center/cover no-repeat;
+  background: url(../assets/events/event.png) center/cover no-repeat;
 }
 .events__cards-content {
   order: 2;
@@ -1009,7 +1009,7 @@ body.no-scroll {
 .visit {
   padding: 90px 24px;
   background: var(--discover-bg);
-  background-image: url(assets/visit/bg.png);
+  background-image: url(../assets/visit/bg.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -1042,7 +1042,7 @@ body.no-scroll {
   }
 }
 .questions {
-  background: url(assets/questions/bg.png);
+  background: url(../assets/questions/bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 85px 24px;
