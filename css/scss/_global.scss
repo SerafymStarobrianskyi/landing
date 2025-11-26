@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+body{
+  background: var(--footer-bg);
+}
+
 img {
   display: block;
   max-width: 100%;
