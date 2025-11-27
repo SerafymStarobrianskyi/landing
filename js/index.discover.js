@@ -84,6 +84,7 @@ function end(e) {
   //   currentSlide--;
   // }
   currentSlide++;
+  fix.textContent = movedBy;
   updateSlide(currentSlide);
 
   track.style.cursor = "grab";
