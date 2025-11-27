@@ -9,40 +9,32 @@ let currentTranslate = 0;
 let prevTranslate = 0;
 
 function getSlideWidth() {
-  return slides[0].getBoundingClientRect().width + 30;
+  const slide = slides[0];
+  const computedStyle = window.getComputedStyle(slide);
+  const marginRight = parseFloat(computedStyle.marginRight) || 0;
+  return slide.getBoundingClientRect().width + marginRight;
 }
 
 function updateSlide(position) {
   const slideWidth = getSlideWidth();
-  
   currentSlide = position;
   currentTranslate = -position * slideWidth;
   prevTranslate = currentTranslate;
+
   track.style.transition = "transform 0.4s ease";
-  track.style.transform = `translateX(-${position * slideWidth}px)`;
-}
-
-points.forEach((point, index) => {
-  point.addEventListener("click", () => {
-    const activeSlide = document.querySelector(
-      ".discover-slider__indicator-point-active"
-    );
-    activeSlide.classList.remove("discover-slider__indicator-point-active");
-    points[index].classList.add("discover-slider__indicator-point-active");
-
-    updateSlide(index);
-  });
-});
-
-window.addEventListener("resize", () => {
-  track.style.transition = "none";
-  const slideWidth = getSlideWidth();
-  currentTranslate = -currentSlide * slideWidth;
-  prevTranslate = currentTranslate;
   track.style.transform = `translateX(${currentTranslate}px)`;
-});
 
-//dragging functionality
+  // Оновлення індикаторів
+  const activeSlide = document.querySelector(
+    ".discover-slider__indicator-point-active"
+  );
+  if (activeSlide) {
+    activeSlide.classList.remove("discover-slider__indicator-point-active");
+  }
+  if (points[currentSlide]) {
+    points[currentSlide].classList.add("discover-slider__indicator-point-active");
+  }
+}
 
 function start(e) {
   isDragging = true;
@@ -62,8 +54,8 @@ function drag(e) {
   const deltaX = currentX - startX;
 
   currentTranslate = prevTranslate + deltaX;
-
   track.style.transform = `translateX(${currentTranslate}px)`;
+
   if (e.cancelable) e.preventDefault();
 }
 
@@ -74,38 +66,29 @@ function end(e) {
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  if (movedBy < -50 && currentSlide < slides.length - 3) {
+  // Логіка переходу
+  if (movedBy < -slideWidth / 4 && currentSlide < slides.length - 1) {
     currentSlide++;
-  } else if (movedBy > 50 && currentSlide > 0) {
+  } else if (movedBy > slideWidth / 4 && currentSlide > 0) {
     currentSlide--;
   }
 
   updateSlide(currentSlide);
 
   track.style.cursor = "grab";
-
-  const activeSlide = document.querySelector(
-    ".discover-slider__indicator-point-active"
-  );
-  if (activeSlide) {
-    activeSlide.classList.remove("discover-slider__indicator-point-active");
-  }
-
-  if (points[currentSlide]) {
-    points[currentSlide].classList.add("discover-slider__indicator-point-active");
-  }
 }
 
+// Mouse events
 track.addEventListener("mousedown", start);
 track.addEventListener("mousemove", drag);
 track.addEventListener("mouseup", end);
 track.addEventListener("mouseleave", end);
 
+// Touch events
 track.addEventListener("touchstart", start, { passive: false });
 track.addEventListener("touchmove", drag, { passive: false });
 track.addEventListener("touchend", end, { passive: false });
-
 track.addEventListener("touchcancel", () => {
   isDragging = false;
   track.style.cursor = "grab";
-});
+}); 
