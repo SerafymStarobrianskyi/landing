@@ -116,4 +116,5 @@ track.addEventListener("touchcancel", () => {
 });
 
 const fix = document.querySelector(".fix");
-fix.textContent = track.getBoundingClientRect().width;
+fix.textContent = "track.getBoundingClientRect().width";
+// fix.textContent = track.getBoundingClientRect().width;
