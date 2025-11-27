@@ -14,12 +14,12 @@ function getSlideWidth() {
 
 function updateSlide(position) {
   const slideWidth = getSlideWidth();
-  track.style.transition = "transform 0.4s ease";
-  track.style.transform = `translateX(-${position * slideWidth}px)`;
-
+  
   currentSlide = position;
   currentTranslate = -position * slideWidth;
   prevTranslate = currentTranslate;
+  track.style.transition = "transform 0.4s ease";
+  track.style.transform = `translateX(-${position * slideWidth}px)`;
 }
 
 points.forEach((point, index) => {
@@ -50,9 +50,7 @@ function start(e) {
 
   startX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
 
-  const slideWidth = getSlideWidth();
-  prevTranslate = -currentSlide * slideWidth;
-  currentTranslate = prevTranslate;
+  prevTranslate = currentTranslate;
 
   track.style.cursor = "grabbing";
 }
@@ -76,7 +74,7 @@ function end(e) {
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  if (movedBy < -50 && currentSlide < slides.length - 1) {
+  if (movedBy < -50 && currentSlide < slides.length - 3) {
     currentSlide++;
   } else if (movedBy > 50 && currentSlide > 0) {
     currentSlide--;
