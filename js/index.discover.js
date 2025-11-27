@@ -3,6 +3,10 @@ const slides = document.querySelectorAll(".discover-slider__slide");
 const points = document.querySelectorAll(".discover-slider__indicator-point");
 
 let currentSlide = 0;
+let isDragging = false;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
 
 function getSlideWidth() {
   return slides[0].getBoundingClientRect().width + 30;
@@ -39,10 +43,6 @@ window.addEventListener("resize", () => {
 });
 
 //dragging functionality
-let isDragging = false;
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
 
 function start(e) {
   isDragging = true;
