@@ -45,6 +45,8 @@ window.addEventListener("resize", () => {
 //dragging functionality
 
 function start(e) {
+  const fix = document.querySelector(".fix");
+  fix.textContent = "start";
   isDragging = true;
   track.style.transition = "none";
 
@@ -57,6 +59,8 @@ function start(e) {
 
 function drag(e) {
   if (!isDragging) return;
+  const fix = document.querySelector(".fix");
+  fix.textContent = "move";
 
   const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
   const deltaX = currentX - startX;
@@ -69,6 +73,8 @@ function drag(e) {
 
 function end(e) {
   if (!isDragging) return;
+  const fix = document.querySelector(".fix");
+  fix.textContent = "end";
   isDragging = false;
 
   const slideWidth = getSlideWidth();
