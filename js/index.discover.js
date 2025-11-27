@@ -69,7 +69,7 @@ function drag(e) {
   if (e.cancelable) e.preventDefault();
 }
 
-function end() {
+function end(e) {
   if (!isDragging) return;
   isDragging = false;
 
@@ -106,7 +106,6 @@ track.addEventListener("mouseleave", end);
 track.addEventListener("touchstart", start, { passive: false });
 track.addEventListener("touchmove", drag, { passive: false });
 track.addEventListener("touchend", end, { passive: false });
-track.addEventListener("touchcancel", end, { passive: false });
 
 track.addEventListener("touchcancel", () => {
   isDragging = false;
