@@ -99,6 +99,7 @@ track.addEventListener("mousemove", drag);
 track.addEventListener("mouseup", end);
 track.addEventListener("mouseleave", end);
 
-track.addEventListener("touchstart", start);
-track.addEventListener("touchmove", drag);
+track.addEventListener("touchstart", start, { passive: false });
+track.addEventListener("touchmove", drag, { passive: false });
 track.addEventListener("touchend", end);
+track.addEventListener("touchcancel", end);
