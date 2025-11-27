@@ -22,12 +22,13 @@
     max-width: 350px;
     &__wrapper {
       overflow: hidden;
-      touch-action: pan-y;
+      
     }
     &__track {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 30px;
+      touch-action: pan-y;
     }
     &__slide {
       min-width: 350px;

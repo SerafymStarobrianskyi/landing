@@ -160,12 +160,12 @@ body.no-scroll {
 }
 .discover-slider__wrapper {
   overflow: hidden;
-  touch-action: pan-y;
 }
 .discover-slider__track {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 30px;
+  touch-action: pan-y;
 }
 .discover-slider__slide {
   min-width: 350px;
