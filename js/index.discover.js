@@ -89,9 +89,13 @@ function end() {
   const activeSlide = document.querySelector(
     ".discover-slider__indicator-point-active"
   );
-  activeSlide.classList.remove("discover-slider__indicator-point-active");
+  if (activeSlide) {
+    activeSlide.classList.remove("discover-slider__indicator-point-active");
+  }
 
-  points[currentSlide].classList.add("discover-slider__indicator-point-active");
+  if (points[currentSlide]) {
+    points[currentSlide].classList.add("discover-slider__indicator-point-active");
+  }
 }
 
 track.addEventListener("mousedown", start);
