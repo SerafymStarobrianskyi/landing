@@ -45,7 +45,6 @@ window.addEventListener("resize", () => {
 //dragging functionality
 
 function start(e) {
-  const fix = document.querySelector(".fix");
   fix.textContent = "start";
   isDragging = true;
   track.style.transition = "none";
@@ -60,7 +59,6 @@ function start(e) {
 
 function drag(e) {
   if (!isDragging) return;
-  const fix = document.querySelector(".fix");
   fix.textContent = "move";
 
   const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
@@ -74,19 +72,18 @@ function drag(e) {
 
 function end(e) {
   if (!isDragging) return;
-  const fix = document.querySelector(".fix");
   fix.textContent = "end";
   isDragging = false;
 
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  if (movedBy < -50 && currentSlide < slides.length - 3) {
-    currentSlide++;
-  } else if (movedBy > 50 && currentSlide > 0) {
-    currentSlide--;
-  }
-
+  // if (movedBy < -50 && currentSlide < slides.length - 3) {
+  //   currentSlide++;
+  // } else if (movedBy > 50 && currentSlide > 0) {
+  //   currentSlide--;
+  // }
+  currentSlide++;
   updateSlide(currentSlide);
 
   track.style.cursor = "grab";
@@ -117,3 +114,6 @@ track.addEventListener("touchcancel", () => {
   isDragging = false;
   track.style.cursor = "grab";
 });
+
+const fix = document.querySelector(".fix");
+fix.textContent = track.getBoundingClientRect().width;
