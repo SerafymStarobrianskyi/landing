@@ -76,9 +76,9 @@ function end() {
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  if (movedBy < -100 / 4 && currentSlide < slides.length - 3) {
+  if (movedBy < -50 && currentSlide < slides.length - 3) {
     currentSlide++;
-  } else if (movedBy > 100 && currentSlide > 0) {
+  } else if (movedBy > 50 && currentSlide > 0) {
     currentSlide--;
   }
 
@@ -103,3 +103,8 @@ track.addEventListener("touchstart", start, { passive: false });
 track.addEventListener("touchmove", drag, { passive: false });
 track.addEventListener("touchend", end, { passive: false });
 track.addEventListener("touchcancel", end, { passive: false });
+
+track.addEventListener("touchcancel", () => {
+  isDragging = false;
+  track.style.cursor = "grab";
+});
