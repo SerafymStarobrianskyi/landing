@@ -144,6 +144,7 @@ function drag(e) {
 
   currentTranslate = prevTranslate + deltaX;
   track.style.transform = `translateX(${currentTranslate}px)`;
+  if (e.cancelable) e.preventDefault();
 }
 
 function end() {
