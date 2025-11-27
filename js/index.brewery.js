@@ -10,16 +10,24 @@ const closeBtns = document.querySelectorAll(".brewery__popup-close");
 
 let currentSlide = 0;
 
+function getSlideWidth() {
+  return slides[0].getBoundingClientRect().width;
+}
+
 function updateSlide(position) {
-  const slideWidth = slides[0].getBoundingClientRect().width;
+  const slideWidth = getSlideWidth();
   track.style.transition = "transform 0.5s ease";
   track.style.transform = `translateX(-${position * slideWidth}px)`;
+
+  currentSlide = position;
+  currentTranslate = -position * slideWidth;
+  prevTranslate = currentTranslate;
 }
 
 nextBtn.addEventListener("click", () => {
   if (currentSlide !== slides.length - 1) {
     currentSlide = (currentSlide + 1) % slides.length;
-    let activeSlide = document.querySelector(
+    const activeSlide = document.querySelector(
       ".brewery-slider__indicator-point-active"
     );
     activeSlide.classList.remove("brewery-slider__indicator-point-active");
@@ -33,7 +41,7 @@ nextBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   if (currentSlide !== 0) {
     currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    let activeSlide = document.querySelector(
+    const activeSlide = document.querySelector(
       ".brewery-slider__indicator-point-active"
     );
     activeSlide.classList.remove("brewery-slider__indicator-point-active");
@@ -46,7 +54,7 @@ prevBtn.addEventListener("click", () => {
 
 points.forEach((point, index) => {
   point.addEventListener("click", () => {
-    let activeSlide = document.querySelector(
+    const activeSlide = document.querySelector(
       ".brewery-slider__indicator-point-active"
     );
     activeSlide.classList.remove("brewery-slider__indicator-point-active");
@@ -55,21 +63,36 @@ points.forEach((point, index) => {
   });
 });
 
+// popup functionality
+
+function tooglePopUp(index) {
+  popups[index].classList.toggle("brewery__popup-active");
+  document.body.classList.toggle("no-scroll");
+}
+let swiped = false;
+
 slides.forEach((slide, index) => {
   slide.addEventListener("click", () => {
+    if (swiped) {
+      swiped = false;
+      return;
+    }
     tooglePopUp(index);
   });
 });
+
 overlays.forEach((overlay, index) => {
   overlay.addEventListener("click", () => {
     tooglePopUp(index);
   });
 });
+
 closeBtns.forEach((closeBtn, index) => {
   closeBtn.addEventListener("click", () => {
     tooglePopUp(index);
   });
 });
+
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -82,11 +105,81 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-function tooglePopUp(index) {
-  popups[index].classList.toggle("brewery__popup-active");
-  document.body.classList.toggle("no-scroll");
+window.addEventListener("resize", () => {
+  track.style.transition = "none";
+  const slideWidth = getSlideWidth();
+  currentTranslate = -currentSlide * slideWidth;
+  prevTranslate = currentTranslate;
+  track.style.transform = `translateX(${currentTranslate}px)`;
+});
+
+// ===== DRAG / SWIPE =====
+let isDragging = false;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+
+function start(e) {
+  isDragging = true;
+  track.style.transition = "none";
+
+  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+
+  const slideWidth = getSlideWidth();
+  prevTranslate = -currentSlide * slideWidth;
+  currentTranslate = prevTranslate;
+
+  track.style.cursor = "grabbing";
 }
 
-window.addEventListener("resize", () => {
-  updateSlide(currentSlide);
-});
+function drag(e) {
+  if (!isDragging) return;
+
+  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  const deltaX = currentX - startX;
+
+  if (Math.abs(deltaX) > 5) {
+    swiped = true;
+  }
+
+  currentTranslate = prevTranslate + deltaX;
+  track.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+function end() {
+  if (!isDragging) return;
+  isDragging = false;
+
+  const slideWidth = getSlideWidth();
+  const movedBy = currentTranslate - prevTranslate;
+
+  if (movedBy < -slideWidth / 4 && currentSlide < slides.length - 1) {
+    currentSlide += 1;
+  }
+  if (movedBy > slideWidth / 4 && currentSlide > 0) {
+    currentSlide -= 1;
+  }
+
+  track.style.transition = "transform 0.5s ease";
+  currentTranslate = -currentSlide * slideWidth;
+  prevTranslate = currentTranslate;
+  track.style.transform = `translateX(${currentTranslate}px)`;
+  track.style.cursor = "grab";
+
+  const activeSlide = document.querySelector(
+    ".brewery-slider__indicator-point-active"
+  );
+  activeSlide.classList.remove("brewery-slider__indicator-point-active");
+  points[currentSlide].classList.add(
+    "brewery-slider__indicator-point-active"
+  );
+}
+
+track.addEventListener("mousedown", start);
+track.addEventListener("mousemove", drag);
+track.addEventListener("mouseup", end);
+track.addEventListener("mouseleave", end);
+
+track.addEventListener("touchstart", start);
+track.addEventListener("touchmove", drag);
+track.addEventListener("touchend", end);
