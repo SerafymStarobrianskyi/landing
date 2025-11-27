@@ -49,7 +49,7 @@ function start(e) {
   isDragging = true;
   track.style.transition = "none";
 
-  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
 
   prevTranslate = currentTranslate;
 
@@ -61,7 +61,7 @@ function drag(e) {
   if (!isDragging) return;
   fix.textContent = "move";
 
-  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
   const deltaX = currentX - startX;
 
   currentTranslate = prevTranslate + deltaX;
@@ -78,27 +78,26 @@ function end(e) {
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  // if (movedBy < -50 && currentSlide < slides.length - 3) {
-  //   currentSlide++;
-  // } else if (movedBy > 50 && currentSlide > 0) {
-  //   currentSlide--;
-  // }
-  currentSlide++;
+  if (movedBy < -50 && currentSlide < slides.length - 3) {
+    currentSlide++;
+  } else if (movedBy > 50 && currentSlide > 0) {
+    currentSlide--;
+  }
   fix.textContent = movedBy;
   updateSlide(currentSlide);
 
   track.style.cursor = "grab";
 
-  const activeSlide = document.querySelector(
-    ".discover-slider__indicator-point-active"
-  );
-  if (activeSlide) {
-    activeSlide.classList.remove("discover-slider__indicator-point-active");
-  }
+  // const activeSlide = document.querySelector(
+  //   ".discover-slider__indicator-point-active"
+  // );
+  // if (activeSlide) {
+  //   activeSlide.classList.remove("discover-slider__indicator-point-active");
+  // }
 
-  if (points[currentSlide]) {
-    points[currentSlide].classList.add("discover-slider__indicator-point-active");
-  }
+  // if (points[currentSlide]) {
+  //   points[currentSlide].classList.add("discover-slider__indicator-point-active");
+  // }
   if (e.cancelable) e.preventDefault();
 }
 
