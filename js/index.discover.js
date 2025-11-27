@@ -55,6 +55,7 @@ function start(e) {
   prevTranslate = currentTranslate;
 
   track.style.cursor = "grabbing";
+  if (e.cancelable) e.preventDefault();
 }
 
 function drag(e) {
@@ -100,6 +101,7 @@ function end(e) {
   if (points[currentSlide]) {
     points[currentSlide].classList.add("discover-slider__indicator-point-active");
   }
+  if (e.cancelable) e.preventDefault();
 }
 
 track.addEventListener("mousedown", start);
