@@ -76,7 +76,7 @@ function end(e) {
   const slideWidth = getSlideWidth();
   const movedBy = currentTranslate - prevTranslate;
 
-  if (movedBy < -50 && currentSlide < slides.length - 3) {
+  if (movedBy < -50 && currentSlide < slides.length - 1) {
     currentSlide++;
   } else if (movedBy > 50 && currentSlide > 0) {
     currentSlide--;
