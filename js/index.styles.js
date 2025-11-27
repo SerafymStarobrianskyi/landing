@@ -133,5 +133,5 @@ track.addEventListener("mouseleave", end);
 
 track.addEventListener("touchstart", start, { passive: false });
 track.addEventListener("touchmove", drag, { passive: false });
-track.addEventListener("touchend", end);
-track.addEventListener("touchcancel", end);
+track.addEventListener("touchend", end, { passive: false });
+track.addEventListener("touchcancel", end, { passive: false });

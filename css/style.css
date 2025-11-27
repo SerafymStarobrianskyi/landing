@@ -160,6 +160,7 @@ body.no-scroll {
 }
 .discover-slider__wrapper {
   overflow: hidden;
+  touch-action: pan-y;
 }
 .discover-slider__track {
   display: grid;
@@ -264,6 +265,7 @@ body.no-scroll {
 }
 .styles-slider__wrapper {
   overflow: hidden;
+  touch-action: pan-y;
 }
 .styles-slider__track {
   display: flex;
@@ -853,6 +855,7 @@ body.no-scroll {
 .testimonials-slider__wrapper {
   margin-top: 30px;
   overflow: hidden;
+  touch-action: pan-y;
 }
 .testimonials-slider__track {
   display: flex;
@@ -1177,6 +1180,7 @@ body.no-scroll {
 }
 .brewery-slider__wrapper {
   overflow: hidden;
+  touch-action: pan-y;
 }
 .brewery-slider__track {
   display: flex;

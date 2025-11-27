@@ -46,6 +46,7 @@
     &__wrapper {
       margin-top: 30px;
       overflow: hidden;
+      touch-action: pan-y;
     }
     &__track {
       display: flex;
