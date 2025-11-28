@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --white-text: #ffffff;
   --bg-nav: #27201e;
@@ -772,6 +773,9 @@ body.no-scroll {
   }
 }
 @media (min-width: 768px) {
+  м .header {
+    background-attachment: scroll;
+  }
   .header-hero {
     flex-direction: row;
     gap: 0px;

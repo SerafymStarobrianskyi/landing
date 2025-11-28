@@ -158,7 +158,10 @@
     bottom: -25px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) {м
+  .header {
+    background-attachment: scroll; 
+  }
   .header-hero {
     flex-direction: row;
     gap: 0px;
