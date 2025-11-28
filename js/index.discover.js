@@ -45,6 +45,7 @@ window.addEventListener("resize", () => {
 //dragging functionality
 
 function start(e) {
+  if (e.cancelable) e.preventDefault();
   isDragging = true;
   track.style.transition = "none";
 
@@ -53,11 +54,12 @@ function start(e) {
   prevTranslate = currentTranslate;
 
   track.style.cursor = "grabbing";
-  if (e.cancelable) e.preventDefault();
+  
 }
 
 function drag(e) {
   if (!isDragging) return;
+  if (e.cancelable) e.preventDefault();
 
   const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
   const deltaX = currentX - startX;
@@ -65,11 +67,12 @@ function drag(e) {
   currentTranslate = prevTranslate + deltaX;
 
   track.style.transform = `translateX(${currentTranslate}px)`;
-  if (e.cancelable) e.preventDefault();
+  
 }
 
 function end(e) {
   if (!isDragging) return;
+  if (e.cancelable) e.preventDefault();
   isDragging = false;
 
   const slideWidth = getSlideWidth();
@@ -94,7 +97,7 @@ function end(e) {
   if (points[currentSlide]) {
     points[currentSlide].classList.add("discover-slider__indicator-point-active");
   }
-  if (e.cancelable) e.preventDefault();
+  
 }
 
 track.addEventListener("mousedown", start);
