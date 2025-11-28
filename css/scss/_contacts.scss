@@ -1,0 +1,113 @@
+.contacts {
+  background: var(--discover-bg);
+  &__container {
+    padding: 90px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__subtitle {
+    font-size: 1.25rem;
+    line-height: 32px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__item {
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    &-label {
+      font-family: "Frank Ruhl Libre", serif;
+      font-size: 1.375rem;
+      color: var(--light-text);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    &-text {
+      font-size: 1.0625rem;
+      color: var(--footer-color);
+    }
+    &-link {
+      font-size: 1.0625rem;
+      color: var(--white-text);
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        color: var(--yellow-text);
+      }
+    }
+  }
+  &__form {
+    background: var(--events-bg);
+    &-form {
+      padding: 30px 50px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+    }
+    &-input {
+      text-align: center;
+      padding: 13px 37px;
+      border: 2px solid #aa7c5a26;
+      background: transparent;
+      border-radius: 55px;
+      &:focus {
+        outline: none;
+        border: 2px solid rgba(201, 152, 117, 0.356);
+      }
+    }
+    &-textarea {
+      padding: 13px 37px;
+      border: 2px solid #aa7c5a26;
+      background: transparent;
+      border-radius: 25px;
+      height: 150px;
+      resize: none;
+      &:focus {
+        outline: none;
+        border: 2px solid rgba(201, 152, 117, 0.356);
+      }
+    }
+    &-button {
+      border: none;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .contacts {
+    &__container {
+      flex-direction: row;
+    }
+    &__info {
+      flex: 1;
+    }
+    &__form {
+      flex: 1;
+      &-form {
+        padding: 50px 100px;
+      }
+    }
+    &__item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      &-label {
+        margin-bottom: 0;
+        width: 140px;
+      }
+    }
+  }
+}

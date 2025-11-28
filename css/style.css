@@ -1278,4 +1278,113 @@ body.no-scroll {
     gap: 30px;
     margin-top: 30px;
   }
+}
+.contacts {
+  background: var(--discover-bg);
+}
+.contacts__container {
+  padding: 90px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.contacts__info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.contacts__subtitle {
+  font-size: 1.25rem;
+  line-height: 32px;
+}
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.contacts__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contacts__item-label {
+  font-family: "Frank Ruhl Libre", serif;
+  font-size: 1.375rem;
+  color: var(--light-text);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.contacts__item-text {
+  font-size: 1.0625rem;
+  color: var(--footer-color);
+}
+.contacts__item-link {
+  font-size: 1.0625rem;
+  color: var(--white-text);
+  text-decoration: none;
+}
+.contacts__item-link:hover, .contacts__item-link:focus {
+  color: var(--yellow-text);
+}
+.contacts__form {
+  background: var(--events-bg);
+}
+.contacts__form-form {
+  padding: 30px 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.contacts__form-input {
+  text-align: center;
+  padding: 13px 37px;
+  border: 2px solid rgba(170, 124, 90, 0.1490196078);
+  background: transparent;
+  border-radius: 55px;
+}
+.contacts__form-input:focus {
+  outline: none;
+  border: 2px solid rgba(201, 152, 117, 0.356);
+}
+.contacts__form-textarea {
+  padding: 13px 37px;
+  border: 2px solid rgba(170, 124, 90, 0.1490196078);
+  background: transparent;
+  border-radius: 25px;
+  height: 150px;
+  resize: none;
+}
+.contacts__form-textarea:focus {
+  outline: none;
+  border: 2px solid rgba(201, 152, 117, 0.356);
+}
+.contacts__form-button {
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .contacts__container {
+    flex-direction: row;
+  }
+  .contacts__info {
+    flex: 1;
+  }
+  .contacts__form {
+    flex: 1;
+  }
+  .contacts__form-form {
+    padding: 50px 100px;
+  }
+  .contacts__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+  .contacts__item-label {
+    margin-bottom: 0;
+    width: 140px;
+  }
 }/*# sourceMappingURL=style.css.map */
