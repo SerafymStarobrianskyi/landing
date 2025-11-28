@@ -45,7 +45,6 @@ window.addEventListener("resize", () => {
 //dragging functionality
 
 function start(e) {
-  fix.textContent = "start";
   isDragging = true;
   track.style.transition = "none";
 
@@ -59,7 +58,6 @@ function start(e) {
 
 function drag(e) {
   if (!isDragging) return;
-  fix.textContent = "move";
 
   const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
   const deltaX = currentX - startX;
@@ -72,7 +70,6 @@ function drag(e) {
 
 function end(e) {
   if (!isDragging) return;
-  fix.textContent = "end";
   isDragging = false;
 
   const slideWidth = getSlideWidth();
@@ -83,21 +80,20 @@ function end(e) {
   } else if (movedBy > 50 && currentSlide > 0) {
     currentSlide--;
   }
-  fix.textContent = movedBy;
   updateSlide(currentSlide);
 
   track.style.cursor = "grab";
 
-  // const activeSlide = document.querySelector(
-  //   ".discover-slider__indicator-point-active"
-  // );
-  // if (activeSlide) {
-  //   activeSlide.classList.remove("discover-slider__indicator-point-active");
-  // }
+  const activeSlide = document.querySelector(
+    ".discover-slider__indicator-point-active"
+  );
+  if (activeSlide) {
+    activeSlide.classList.remove("discover-slider__indicator-point-active");
+  }
 
-  // if (points[currentSlide]) {
-  //   points[currentSlide].classList.add("discover-slider__indicator-point-active");
-  // }
+  if (points[currentSlide]) {
+    points[currentSlide].classList.add("discover-slider__indicator-point-active");
+  }
   if (e.cancelable) e.preventDefault();
 }
 
@@ -114,7 +110,3 @@ track.addEventListener("touchcancel", () => {
   isDragging = false;
   track.style.cursor = "grab";
 });
-
-const fix = document.querySelector(".fix");
-fix.textContent = "track.getBoundingClientRect().width";
-// fix.textContent = track.getBoundingClientRect().width;
