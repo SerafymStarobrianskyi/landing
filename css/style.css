@@ -41,6 +41,7 @@ img {
   margin: auto;
 }
 
+html.no-scroll,
 body.no-scroll {
   overflow: hidden;
 }
@@ -669,6 +670,7 @@ body.no-scroll {
   gap: 20px;
 }
 .header-bottom__burger {
+  z-index: 1011;
   width: 24px;
   height: 16px;
   position: relative;
