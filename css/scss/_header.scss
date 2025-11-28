@@ -157,11 +157,11 @@
   .header-hero::after {
     bottom: -25px;
   }
-}
-@media (min-width: 768px) {м
   .header {
     background-attachment: scroll; 
   }
+}
+@media (min-width: 768px) {
   .header-hero {
     flex-direction: row;
     gap: 0px;

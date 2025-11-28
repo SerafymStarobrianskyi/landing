@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --white-text: #ffffff;
   --bg-nav: #27201e;
@@ -771,11 +770,11 @@ body.no-scroll {
   .header-hero::after {
     bottom: -25px;
   }
-}
-@media (min-width: 768px) {
-  м .header {
+  .header {
     background-attachment: scroll;
   }
+}
+@media (min-width: 768px) {
   .header-hero {
     flex-direction: row;
     gap: 0px;
@@ -1047,6 +1046,11 @@ body.no-scroll {
   gap: 30px;
 }
 
+@media (max-width: 768px) {
+  .visit {
+    background-attachment: scroll;
+  }
+}
 @media (min-width: 483px) {
   .visit__buttons {
     flex-direction: row;

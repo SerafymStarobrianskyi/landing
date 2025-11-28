@@ -27,6 +27,11 @@
     gap: 30px;
   }
 }
+@media (max-width: 768px) {
+  .visit {
+    background-attachment: scroll; 
+  }
+}
 @media (min-width: 483px) {
   .visit__buttons {
     flex-direction: row;
