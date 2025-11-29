@@ -1,115 +1,80 @@
-const track = document.querySelector(".discover-slider__track");
-const slides = document.querySelectorAll(".discover-slider__slide");
-const points = document.querySelectorAll(".discover-slider__indicator-point");
+const wrapper = document.querySelector(".discover-slider__wrapper");
+const track   = document.querySelector(".discover-slider__track");
+const slides  = [...document.querySelectorAll(".discover-slider__slide")];
+const points  = [...document.querySelectorAll(".discover-slider__indicator-point")];
 
-let currentSlide = 0;
-let isDragging = false;
+let currentIndex = 0;
 let startX = 0;
+let startTranslate = 0;
 let currentTranslate = 0;
-let prevTranslate = 0;
+let isPointerDown = false;
 
-function getSlideWidth() {
-  return slides[0].getBoundingClientRect().width + 30;
+const GAP = 30; // збігається з CSS
+function slideWidth() {
+  // беремо реальну ширину елемента (без gap)
+  return slides[0].getBoundingClientRect().width;
+}
+function visibleCount() {
+  // скільки слайдів реально вміщується зараз
+  return Math.max(1, Math.round(wrapper.clientWidth / (slideWidth())));
+}
+function maxIndex() {
+  // останній індекс, на який можна прокрутити (без «порожнього хвоста»)
+  return Math.max(0, (slides.length - visibleCount())-2);
+}
+function setTranslate(x, withAnim = false) {
+  track.style.transition = withAnim ? "transform 0.4s ease" : "none";
+  track.style.transform = `translateX(${x}px)`;
+}
+function goTo(index, withAnim = true) {
+  currentIndex = Math.min(Math.max(0, index), maxIndex());
+  currentTranslate = -(currentIndex * (slideWidth() + GAP));
+  setTranslate(currentTranslate, withAnim);
+  // індикатори
+  points.forEach((p,i)=>p.classList.toggle("discover-slider__indicator-point-active", i===currentIndex));
 }
 
-function updateSlide(position) {
-  const slideWidth = getSlideWidth();
-  
-  currentSlide = position;
-  currentTranslate = -position * slideWidth;
-  prevTranslate = currentTranslate;
-  track.style.transition = "transform 0.4s ease";
-  track.style.transform = `translateX(-${position * slideWidth}px)`;
-}
+// індикатори кліком
+points.forEach((p, i) => p.addEventListener("click", () => goTo(i)));
 
-points.forEach((point, index) => {
-  point.addEventListener("click", () => {
-    const activeSlide = document.querySelector(
-      ".discover-slider__indicator-point-active"
-    );
-    activeSlide.classList.remove("discover-slider__indicator-point-active");
-    points[index].classList.add("discover-slider__indicator-point-active");
+// ресайз/орієнтація
+window.addEventListener("resize", () => goTo(currentIndex, false));
+window.addEventListener("orientationchange", () => setTimeout(()=>goTo(currentIndex,false), 0));
 
-    updateSlide(index);
-  });
-});
-
-window.addEventListener("resize", () => {
-  track.style.transition = "none";
-  const slideWidth = getSlideWidth();
-  currentTranslate = -currentSlide * slideWidth;
-  prevTranslate = currentTranslate;
-  track.style.transform = `translateX(${currentTranslate}px)`;
-});
-
-//dragging functionality
-
-function start(e) {
-  if (e.cancelable) e.preventDefault();
-  isDragging = true;
-  track.style.transition = "none";
-
-  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
-
-  prevTranslate = currentTranslate;
-
+/* === Pointer Events замість touch/mouse === */
+track.addEventListener("pointerdown", (e) => {
+  // дозволяємо тільки первинний вказівник (палец)
+  if (!e.isPrimary) return;
+  isPointerDown = true;
+  track.setPointerCapture(e.pointerId);
   track.style.cursor = "grabbing";
-  
-}
-
-function drag(e) {
-  if (!isDragging) return;
-  if (e.cancelable) e.preventDefault();
-
-  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
-  const deltaX = currentX - startX;
-
-  currentTranslate = prevTranslate + deltaX;
-
-  track.style.transform = `translateX(${currentTranslate}px)`;
-  
-}
-
-function end(e) {
-  if (!isDragging) return;
-  if (e.cancelable) e.preventDefault();
-  isDragging = false;
-
-  const slideWidth = getSlideWidth();
-  const movedBy = currentTranslate - prevTranslate;
-
-  if (movedBy < -50 && currentSlide < slides.length - 3) {
-    currentSlide++;
-  } else if (movedBy > 50 && currentSlide > 0) {
-    currentSlide--;
-  }
-  updateSlide(currentSlide);
-
-  track.style.cursor = "grab";
-
-  const activeSlide = document.querySelector(
-    ".discover-slider__indicator-point-active"
-  );
-  if (activeSlide) {
-    activeSlide.classList.remove("discover-slider__indicator-point-active");
-  }
-
-  if (points[currentSlide]) {
-    points[currentSlide].classList.add("discover-slider__indicator-point-active");
-  }
-  
-}
-
-track.addEventListener("mousedown", start);
-track.addEventListener("mousemove", drag);
-track.addEventListener("mouseup", end);
-track.addEventListener("mouseleave", end);
-
-track.addEventListener("touchstart", start, { passive: false });
-track.addEventListener("touchmove", drag, { passive: false });
-track.addEventListener("touchend", end, { passive: false });
-
-track.addEventListener("touchcancel", () => {
-  isDragging = false;
-  track.style.cursor = "grab";
+  track.style.transition = "none";
+  startX = e.clientX;
+  startTranslate = currentTranslate;
 });
+
+track.addEventListener("pointermove", (e) => {
+  if (!isPointerDown || !e.isPrimary) return;
+  // блокуємо горизонтальний скрол контейнера, але лишаємо вертикальний (через touch-action: pan-y в CSS)
+  const deltaX = e.clientX - startX;
+  currentTranslate = startTranslate + deltaX;
+  setTranslate(currentTranslate, false);
+});
+
+track.addEventListener("pointerup", onPointerUp);
+track.addEventListener("pointercancel", onPointerUp);
+function onPointerUp(e){
+  if (!isPointerDown) return;
+  isPointerDown = false;
+  track.releasePointerCapture?.(e.pointerId);
+  track.style.cursor = "grab";
+  // визначаємо «флік»
+  const moved = currentTranslate - startTranslate;
+  const threshold = 50;
+  if (moved < -threshold) goTo(currentIndex + 1);
+  else if (moved > threshold) goTo(currentIndex - 1);
+  else goTo(currentIndex); // відкотити
+}
+
+// стартова позиція
+goTo(0, false);

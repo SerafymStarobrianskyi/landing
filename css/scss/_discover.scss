@@ -22,16 +22,15 @@
     max-width: 350px;
     &__wrapper {
       overflow: hidden;
-      
     }
     &__track {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      display: flex;
       gap: 30px;
+      will-change: transform;
       touch-action: pan-y;
     }
     &__slide {
-      min-width: 350px;
+      flex: 0 0 350px;
       background: url(../assets/discovery/barrel.png);
       background-position: center;
       background-repeat: no-repeat;
