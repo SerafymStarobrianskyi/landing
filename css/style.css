@@ -166,7 +166,6 @@ body.no-scroll {
   gap: 30px;
   will-change: transform;
   touch-action: pan-y;
-  scroll-behavior: auto;
 }
 .discover-slider__slide {
   flex: 0 0 350px;
