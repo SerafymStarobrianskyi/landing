@@ -28,6 +28,7 @@
       gap: 30px;
       will-change: transform;
       touch-action: pan-y;
+      scroll-behavior: auto;
     }
     &__slide {
       flex: 0 0 350px;
