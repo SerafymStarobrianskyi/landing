@@ -99,15 +99,15 @@ function end(e) {
 }
 
 track.addEventListener("mousedown", start);
-track.addEventListener("mousemove", drag);
-track.addEventListener("mouseup", end);
-track.addEventListener("mouseleave", end);
+window.addEventListener("mousemove", drag);
+window.addEventListener("mouseup", end);
+window.addEventListener("mouseleave", end);
 
 track.addEventListener("touchstart", start, { passive: false });
-track.addEventListener("touchmove", drag, { passive: false });
-track.addEventListener("touchend", end, { passive: false });
+window.addEventListener("touchmove", drag, { passive: false });
+window.addEventListener("touchend", end, { passive: false });
 
-track.addEventListener("touchcancel", () => {
+window.addEventListener("touchcancel", () => {
   isDragging = false;
   track.style.cursor = "grab";
 });
