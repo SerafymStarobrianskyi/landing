@@ -45,7 +45,6 @@ window.addEventListener("resize", () => {
 //dragging functionality
 
 function start(e) {
-  if (e.cancelable) e.preventDefault();
   isDragging = true;
   track.style.transition = "none";
 
@@ -59,7 +58,7 @@ function start(e) {
 
 function drag(e) {
   if (!isDragging) return;
-  if (e.cancelable) e.preventDefault();
+  e.preventDefault();
 
   const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
   const deltaX = currentX - startX;
@@ -72,7 +71,6 @@ function drag(e) {
 
 function end(e) {
   if (!isDragging) return;
-  if (e.cancelable) e.preventDefault();
   isDragging = false;
 
   const movedBy = currentTranslate - prevTranslate;
