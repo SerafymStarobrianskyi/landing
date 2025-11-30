@@ -64,6 +64,7 @@ function drag(e) {
   const deltaX = currentX - startX;
 
   currentTranslate = prevTranslate + deltaX;
+  track.classList.add("dragging");
 
   track.style.transform = `translateX(${currentTranslate}px)`;
   
@@ -74,6 +75,7 @@ function end(e) {
   isDragging = false;
 
   const movedBy = currentTranslate - prevTranslate;
+  track.classList.remove("dragging");
 
   if (movedBy < -50 && currentSlide < slides.length - 3) {
     currentSlide++;

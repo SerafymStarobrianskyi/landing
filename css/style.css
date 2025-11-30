@@ -613,6 +613,10 @@ body.no-scroll {
   font-weight: 600;
 }
 
+.dragging {
+  scroll-behavior: auto;
+}
+
 .header {
   background: linear-gradient(rgba(0, 0, 0, 0), rgb(44, 34, 29)), url(../assets/hero/background.png);
   background-repeat: no-repeat;
