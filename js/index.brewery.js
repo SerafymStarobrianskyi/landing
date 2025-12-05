@@ -115,15 +115,20 @@ window.addEventListener("resize", () => {
 
 // ===== DRAG / SWIPE =====
 let isDragging = false;
+let isScrolling = false;
+let startY = 0;
 let startX = 0;
 let currentTranslate = 0;
 let prevTranslate = 0;
 
 function start(e) {
   isDragging = true;
+  isScrolling = false;
   track.style.transition = "none";
 
-  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  const point = e.type.includes("mouse") ? e : e.touches[0];
+  startX = point.clientX || point.pageX;
+  startY = point.clientY || point.pageY;
 
   const slideWidth = getSlideWidth();
   prevTranslate = -currentSlide * slideWidth;
@@ -135,18 +140,27 @@ function start(e) {
 function drag(e) {
   if (!isDragging) return;
 
-  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
-  const deltaX = currentX - startX;
+  const point = e.type.includes("mouse") ? e : e.touches[0];
+  const currentX = point.clientX || point.pageX;
+  const currentY = point.clientY || point.pageY;
 
-  if (Math.abs(deltaX) > 5) {
-    swiped = true;
+  const deltaX = currentX - startX;
+  const deltaY = currentY - startY;
+
+  if (!isScrolling && Math.abs(deltaY) > Math.abs(deltaX)) {
+    isScrolling = true;
+    isDragging = false;
+    track.style.cursor = "grab";
+    return;
   }
+
+  if (isScrolling) return;
 
   currentTranslate = prevTranslate + deltaX;
   track.style.transform = `translateX(${currentTranslate}px)`;
+
   if (e.cancelable) e.preventDefault();
 }
-
 function end() {
   if (!isDragging) return;
   isDragging = false;

@@ -5,6 +5,8 @@ const points = document.querySelectorAll(".discover-slider__indicator-point");
 let currentSlide = 0;
 let isDragging = false;
 let startX = 0;
+let isScrolling = false;
+let startY = 0;
 let currentTranslate = 0;
 let prevTranslate = 0;
 
@@ -46,27 +48,43 @@ window.addEventListener("resize", () => {
 
 function start(e) {
   isDragging = true;
+  isScrolling = false;
   track.style.transition = "none";
 
-  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
+  const point = e.type.includes("mouse") ? e : e.touches[0];
+  startX = point.clientX || point.pageX;
+  startY = point.clientY || point.pageY;
 
-  prevTranslate = currentTranslate;
+  const slideWidth = getSlideWidth();
+  prevTranslate = -currentSlide * slideWidth;
+  currentTranslate = prevTranslate;
 
   track.style.cursor = "grabbing";
-  
 }
 
 function drag(e) {
   if (!isDragging) return;
-  e.preventDefault();
 
-  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
+  const point = e.type.includes("mouse") ? e : e.touches[0];
+  const currentX = point.clientX || point.pageX;
+  const currentY = point.clientY || point.pageY;
+
   const deltaX = currentX - startX;
+  const deltaY = currentY - startY;
+
+  if (!isScrolling && Math.abs(deltaY) > Math.abs(deltaX)) {
+    isScrolling = true;
+    isDragging = false;
+    track.style.cursor = "grab";
+    return;
+  }
+
+  if (isScrolling) return;
 
   currentTranslate = prevTranslate + deltaX;
-
   track.style.transform = `translateX(${currentTranslate}px)`;
-  
+
+  if (e.cancelable) e.preventDefault();
 }
 
 function end(e) {
